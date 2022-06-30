@@ -1,0 +1,37 @@
+
+    <!DOCTYPE html>
+    <html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <script type="text/javascript" src="../js/vue.js"></script>
+
+    </head>
+
+    <body>
+        <div id="root">
+            <!-- v-once只解析一次,之后视为静态内容(也有优化性能的作用) -->
+            <h2 v-once>初始化的n:{{ n }}</h2>
+            <h2 @click="n++">当前n:{{ n }}</h2>
+        </div>
+        <script type="text/javascript">
+            Vue.config.productionTip = false
+            const vm = new Vue({
+                data(){
+                    return {
+                        n:1,
+                    }
+                },
+                methods: {
+                    
+                },
+            })
+            vm.$mount('#root')
+        </script>
+
+    </body>
+
+    </html>

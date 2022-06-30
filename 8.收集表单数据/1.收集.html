@@ -1,0 +1,83 @@
+
+    <!DOCTYPE html>
+    <html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <script type="text/javascript" src="../js/vue.js"></script>
+    </head>
+
+    <body>
+        <div id="root">
+            <form @submit.prevent="demo">
+                <label for="zh"> 账号: </label>
+                <!-- v-model.trim 去掉前后空格 -->
+                <input type="text" id="zh" v-model.trim="userInfo.account"> <br>
+
+                <label for="pw"> 密码: </label>
+                <input type="text" id="pw" v-model="userInfo.password"> <br>
+
+                <label for="age"> 年龄: </label>
+                <!-- type number 让用户只能输数字,v-model.number 把输入转化成数字类型 -->
+                <input type="number" id="age" v-model.number="userInfo.age"> <br>
+
+                <label for="sex"> 性别: </label>
+                男<input type="radio" id="sex" name="sex" value="male" v-model="userInfo.sex">
+                女<input type="radio" id="sex" name="sex" value="female" v-model="userInfo.sex"> <br>
+
+                <label for="hobby"> 爱好: </label>
+                学习<input type="checkbox" id="hobby" value="study" v-model="userInfo.hobby">
+                睡觉<input type="checkbox" id="hobby" value="sleep" v-model="userInfo.hobby">
+                摆烂<input type="checkbox" id="hobby" value="bailan" v-model="userInfo.hobby"> <br>
+
+                所属校区
+                <select name="" id="" v-model="userInfo.city">
+                    <option value="">请选择地区</option>
+                    <option value="beijing">北京</option>
+                    <option value="hangzhou">杭州</option>
+                    <option value="shanghai">上海</option>
+                </select> <br>
+
+                其他信息:
+                <!-- v-model.lazy 失去焦点后再收集数据 -->
+                <textarea rows="1" cols="8" v-model.lazy="userInfo.other"></textarea> <br>
+
+                <input type="checkbox" v-model="userInfo.agree"> 阅读并接受<a href="http://www.baidu.com">《协议》</a> <br>
+                <button>提交</button>
+            </form>
+        </div>
+        <script type="text/javascript">
+            Vue.config.productionTip = false
+            const vm = new Vue({
+                data(){
+                    return {
+                        userInfo:{
+                        account:'',
+                        password:'',
+                        age: '',
+                        // 单选框需要指定value,因为 v-model 返回值实际上是 value
+                        sex:'',
+                        // 这边的初始值会影响多选框(checkbox),用字符串会导致获取checked属性(false or true),
+                        // 用数组才收集 value 值
+                        hobby:[],
+                        city:'',
+                        other:'',
+                        agree:'',  
+                        } 
+                    }
+                },
+                methods: {
+                    demo(){
+                        console.log(JSON.stringify(this.userInfo));
+                    }
+                },
+            })
+            vm.$mount('#root')
+        </script>
+
+    </body>
+
+    </html>

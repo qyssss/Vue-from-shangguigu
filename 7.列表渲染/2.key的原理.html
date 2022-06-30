@@ -1,0 +1,43 @@
+
+    <!DOCTYPE html>
+    <html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <script type="text/javascript" src="../js/vue.js"></script>
+    </head>
+
+    <body>
+        <div id="root">
+            <ul>
+                <!-- 遍历数组 -->
+                <li v-for="(person, index) in persons" ::key="index">
+                    {{ person.name }}-{{ person.age }}--{{ index }}
+                </li>
+            </ul>
+            <ul>
+              
+        </div>
+        <script type="text/javascript">
+            Vue.config.productionTip = false
+            const vm = new Vue({
+                data(){
+                    return {
+                        persons:[
+                            {id:001,name:'sqy',age:23},
+                            {id:002,name:'lbw',age:12},
+                            {id:003,name:'dz',age:21},
+                        ],
+                    
+                    }
+                }
+            })
+            vm.$mount('#root')
+        </script>
+
+    </body>
+
+    </html>

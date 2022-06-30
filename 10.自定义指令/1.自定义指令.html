@@ -1,0 +1,79 @@
+
+    <!DOCTYPE html>
+    <html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <script type="text/javascript" src="../js/vue.js"></script>
+
+    </head>
+
+    <body>
+        <div id="root">
+            <h2>当前n: <span v-text="n"></span> </h2>
+            <!-- 如果是 v-big-number这样的 -->
+            <!-- 下面需要写成 'big-number'(要加引号,不可简写) -->
+            <h2>放大10倍的n: <span v-big="n"></span> </h2>
+            <button @click="n++">点我n++</button>
+            <hr>
+            <input type="text" v-focus:value="n">
+        </div>
+
+        <script type="text/javascript">
+            Vue.config.productionTip = false
+
+            // 全局指令
+            /* Vue.directive('focus',{
+                 focus:{
+                        update(el,binding) {
+                            el.value=binding.value
+                        },
+                    }
+            })
+            Vue.directive('big',function(el,binding){
+                        el.innerText=binding.value * 10
+            },) */
+
+            const vm = new Vue({
+                data(){
+                    return {
+                        n:1,
+                    }
+                },
+                // 指令里面的 this 是 window !!!!!!!!!!!
+                directives:{
+                    // big函数调用情况:1.指令和元素成功绑定 2.指令所在的模板被重新解析就会调用
+                    // el 是 dom 元素(span),binding.value就是n的值(binding是绑定关系)
+                    big(el,binding){
+                        el.innerText=binding.value * 10
+                    },
+                    // focus(el,binding){
+                    //     el.value=binding.value
+                    //     // Vue一开始只做了绑定,dom元素还未真实渲染,此时focus无效
+                    //     el.focus()
+                    // },
+                    focus:{
+                        // 指令与元素成功绑定时(一开始)
+                        bind(el,binding){
+                            el.value=binding.value
+                        },
+                        // 指令所在元素被插入页面时
+                        inserted(el,binding) {
+                             el.focus()
+                        },
+                        // 模板被重新解析时
+                        update(el,binding) {
+                            el.value=binding.value
+                        },
+                    }
+                }
+            })
+            vm.$mount('#root')
+        </script>
+
+    </body>
+
+    </html>

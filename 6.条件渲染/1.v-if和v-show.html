@@ -1,0 +1,43 @@
+
+    <!DOCTYPE html>
+    <html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <script type="text/javascript" src="../js/vue.js"></script>
+    </head>
+
+    <body>
+        <div id="root">
+            <h2 v-show="a">n:{{ n }}</h2>
+            <button @click="n++">点我 n + 1</button>
+            <div v-if="n === 1">Angular</div>
+            <div v-else-if="n === 2">React</div>
+            <div v-else>Vue</div>
+
+            <!-- template 不会破坏结构, 只能和 v-if 一起 -->
+            <template v-if="n === 0">
+                <h2>1</h2>
+                <h2>2</h2>
+                <h2>3</h2>
+            </template>
+
+        </div>
+        <script type="text/javascript">
+            Vue.config.productionTip = false
+            const vm = new Vue({
+                data(){
+                    return {
+                        n:0,
+                    }
+                }
+            })
+            vm.$mount('#root')
+        </script>
+
+    </body>
+
+    </html>

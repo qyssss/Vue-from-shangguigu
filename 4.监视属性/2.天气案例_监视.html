@@ -1,0 +1,60 @@
+
+    <!DOCTYPE html>
+    <html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <script type="text/javascript" src="../js/vue.js"></script>
+    </head>
+
+    <body>
+        <div id="root">
+            <h2>天气怎么样? {{ info }}</h2>
+            <button @click="isHot = !isHot">切换</button>
+        </div>
+        <script type="text/javascript">
+            Vue.config.productionTip = false
+            const vm = new Vue({
+                data(){
+                    return {
+                      isHot:true, 
+                    }
+                },
+                computed:{
+                    info(){
+                        return this.isHot ? 'Hot' : 'Cool'
+                    }
+                },
+                methods: {
+                //    change(){
+                //     this.isHot = !this.isHot
+                //    }
+                },
+                /*watch:{
+                    // 也可监测 info (计算属性的值)
+                    isHot:{
+                        immediate:true, // 初始化时让 handler 调用一下
+                        // isHot 改变时 handler 被调用
+                        handler(newValue,oldValue){
+                            console.log('isHot change',newValue,oldValue);
+                        }
+                    }
+                }
+                */
+                
+            })
+            // 另一种写法 这边的 isHot 应该传入一个属性 要加 ''
+            vm.$watch('isHot',{
+                immediate:true,
+                handler(newValue,oldValue){
+                console.log('isHot change',newValue,oldValue)}
+            })
+            vm.$mount('#root')
+        </script>
+
+    </body>
+
+    </html>

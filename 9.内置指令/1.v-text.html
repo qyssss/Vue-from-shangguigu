@@ -1,0 +1,38 @@
+
+    <!DOCTYPE html>
+    <html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <script type="text/javascript" src="../js/vue.js"></script>
+    </head>
+
+    <body>
+        <div id="root">
+            <!-- v-text 只能渲染文本内容,替换节点中的内容 -->
+            <div>hello,{{ name }}</div>
+            <div v-text="name"></div>
+            <div v-text="str"></div>
+        </div>
+        <script type="text/javascript">
+            Vue.config.productionTip = false
+            const vm = new Vue({
+                data(){
+                    return {
+                        name:'sqy',
+                        str:'<h3>hello</h3>'
+                    }
+                },
+                methods: {
+                    
+                },
+            })
+            vm.$mount('#root')
+        </script>
+
+    </body>
+
+    </html>

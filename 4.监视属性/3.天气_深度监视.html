@@ -1,0 +1,78 @@
+
+    <!DOCTYPE html>
+    <html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <script type="text/javascript" src="../js/vue.js"></script>
+    </head>
+
+    <body>
+        <div id="root">
+            <h2>天气怎么样? {{ info }}</h2>
+            <button @click="isHot = !isHot">切换</button>
+            <hr>
+            <h3>a: {{ numbers.a }}</h3>
+            <button @click="numbers.a++"> 点我 a + 1</button>
+
+            <h3>b: {{ numbers.b }}</h3>
+            <button @click="numbers.b++"> 点我 b + 1</button>
+            <button @click="numbers = { a: 66, b: 88 }"> 替换numbers</button>
+        </div>
+        <script type="text/javascript">
+            Vue.config.productionTip = false
+            const vm = new Vue({
+                data(){
+                    return {
+                      isHot:true, 
+                      numbers:{
+                        a:1,
+                        b:1,
+                      }
+                    }
+                },
+                computed:{
+                    info(){
+                        return this.isHot ? 'Hot' : 'Cool'
+                    }
+                },
+                methods: {
+                //    change(){
+                //     this.isHot = !this.isHot
+                //    }
+                },
+                watch:{
+                    isHot:{
+                        handler(newValue,oldValue){
+                            console.log('isHot change',newValue,oldValue);
+                        }
+                    },
+                    // 监视多级结构中某个属性变化
+                    // 这里因为 要通过属性形式访问,要用最原始形式,所以加 '',
+                    // 平时一直是用对象的简写方法, 省略了 键
+                    /* 'numbers.a':{
+                        handler(){
+                            console.log('a 变了');
+                        }
+                    } */
+                    numbers:{
+                        // 深度监视可以监视对象内部值改变
+                        deep:true,
+                        handler(){
+                            console.log('深度开启,发现change');
+                        }
+                    }
+                }
+                
+            })
+
+          
+            vm.$mount('#root')
+        </script>
+
+    </body>
+
+    </html>

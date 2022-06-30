@@ -1,0 +1,80 @@
+
+    <!DOCTYPE html>
+    <html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <script type="text/javascript" src="../js/vue.js"></script>
+
+    </head>
+
+    <body>
+        <div id="root">
+            <student></student>
+            <student></student>
+            <hr>
+            <school></school>
+            <hello></hello>
+        </div>
+
+        <script type="text/javascript">
+            Vue.config.productionTip = false
+
+            // Vue2 使用 extend Vue3 是 Vue.createApp
+            // 创建 school 组件
+            const school = Vue.extend({
+                data() {
+                    return {
+                        schoolName:'sgg',
+                        address:'beijing',
+                    }
+                },
+                template:`
+                    <div>
+                        <h2>学校名称:{{ schoolName }}</h2>
+                        <h2>学校地址:{{ address }}</h2>
+                    </div>
+                `,
+            })
+
+            // 创建 student 组件
+            const student = Vue.extend({
+                data() {
+                    return {
+                        stuName:'sqy',
+                        stuAge:12
+                    }
+                },
+                template:`
+                <div>
+                <h2>学生姓名:{{ stuName }}</h2>
+                <h2>学生年龄:{{ stuAge }}</h2>    
+                </div>
+                `
+            })
+
+            const hello = Vue.extend({
+                template:`
+                <div>
+                <h2>hello</h2>    
+                </div>
+                `
+            })
+            // 全局注册 第一个参数是组件名字,第二个是组件在哪
+            Vue.component('hello',hello)
+            
+            const vm = new Vue({
+                // 注册组件
+                components:{
+                    school,
+                    student,
+                }
+            }).$mount('#root')
+        </script>
+
+    </body>
+
+    </html>

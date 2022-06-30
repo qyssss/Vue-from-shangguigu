@@ -1,0 +1,39 @@
+
+    <!DOCTYPE html>
+    <html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <script type="text/javascript" src="../js/vue.js"></script>
+    </head>
+
+    <body>
+        <div id="root">
+            <!-- v-html 支持结构解析 、
+            (存在安全性问题！！！！！！xss攻击,不要在用户提交内容上使用) -->
+            <div>hello,{{ name }}</div>
+            <div v-text="name"></div>
+            <div v-html="str"></div>
+        </div>
+        <script type="text/javascript">
+            Vue.config.productionTip = false
+            const vm = new Vue({
+                data(){
+                    return {
+                        name:'sqy',
+                        str:'<h3>hello</h3>'
+                    }
+                },
+                methods: {
+                    
+                },
+            })
+            vm.$mount('#root')
+        </script>
+
+    </body>
+
+    </html>

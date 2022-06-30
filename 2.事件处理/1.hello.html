@@ -1,0 +1,46 @@
+
+    <!DOCTYPE html>
+    <html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <script type="text/javascript" src="../js/vue.js"></script>
+    </head>
+
+    <body>
+        <div id="root">
+            <h2>hello {{ name }}</h2>
+            <button @click="showInfo1">click me!</button>
+            <!-- 传参 默认会传 $event-->
+            <button @click="showInfo2(66, $event)">click it!</button>
+        </div>
+        <script type="text/javascript">
+            Vue.config.productionTip = false
+            const vm = new Vue({
+                data(){
+                    return {
+                        name:'sqy'
+                    }
+                },
+                methods:{
+                    showInfo1(event){
+                        console.log(event.target);
+                        console.log(this); // this就是vm
+                        alert('hello')
+                    },
+                    showInfo2(number,event){
+                        console.log(event);
+                        console.log(number);
+                        alert('hello2')
+                    },
+                }
+            })
+            vm.$mount('#root')
+        </script>
+
+    </body>
+
+    </html>

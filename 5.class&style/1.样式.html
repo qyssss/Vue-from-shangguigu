@@ -1,0 +1,95 @@
+
+    <!DOCTYPE html>
+    <html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <script type="text/javascript" src="../js/vue.js"></script>
+        <style>
+            .basic {
+                height: 100px;
+                width: 100px;
+                background-color: pink;
+            }
+
+            .happy {
+                height: 100px;
+                width: 100px;
+                background-color: rgb(90, 16, 106);
+            }
+
+            .normal {
+                height: 100px;
+                width: 100px;
+                background-color: rgb(201, 162, 7);
+            }
+
+            .sad {
+                height: 100px;
+                width: 100px;
+                background-color: rgb(27, 21, 186);
+            }
+
+            .me1 {
+                border: 1px solid pink;
+            }
+
+            .me2 {
+                border: 1px solid rgb(41, 7, 175);
+            }
+
+            .me3 {
+                border: 1px solid rgb(225, 14, 49);
+            }
+        </style>
+    </head>
+
+    <body>
+        <div id="root">
+            <!-- 绑定 class 样式----字符串写法 适用于样式类名需要动态指定 -->
+            <div class="basic" :class="mood" @click="changemood">{{ name }}</div>
+
+            <!-- 数组写法适用于样式个数不确定、名字不确定的情况 -->
+            <div class="basic" :class="arr">{{ name }}</div>
+
+            <!-- 对象写法用于绑定的样式个数确定,名字确定,动态决定用不用 -->
+            <div class="basic" :class="classObj">{{ name }}</div>
+
+            <!-- style样式---对象写法 -->
+            <div class="basic" :style="styleObj">{{ name }}</div>
+        </div>
+        <script type="text/javascript">
+            Vue.config.productionTip = false
+           const vm = new Vue({
+                data(){
+                    return {
+                        name:'sqy',
+                        mood:'normal',
+                        arr:['me1','me2','me3'],
+                        classObj:{
+                            me1:false,
+                            me2:true,
+                        },
+                        styleObj:{
+                            fontSize:'40px',
+                            backgroundColor:'red',
+                        }
+                    }
+                },
+                methods: {
+                    changemood(){
+                        const arr = ['happy','sad','normal']
+                        // 随机生成一个效果
+                        this.mood = arr[Math.floor(Math.random()*3)]
+                    }
+                },
+            })
+            vm.$mount('#root')
+        </script>
+
+    </body>
+
+    </html>

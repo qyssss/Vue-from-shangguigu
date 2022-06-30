@@ -1,0 +1,41 @@
+
+    <!DOCTYPE html>
+    <html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <script type="text/javascript" src="../js/vue.js"></script>
+        <style>
+            [v-cloak] {
+                display: none;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div id="root">
+            <!-- v-cloak 在 Vue 未介入前存在,Vue介入后消失,
+            和 css 配合,不会让未解析的模板显示出来 -->
+            <h2 v-cloak>{{ name }}</h2>
+        </div>
+        <script type="text/javascript">
+            Vue.config.productionTip = false
+            const vm = new Vue({
+                data(){
+                    return {
+                        name:'sqy',
+                    }
+                },
+                methods: {
+                    
+                },
+            })
+            vm.$mount('#root')
+        </script>
+
+    </body>
+
+    </html>

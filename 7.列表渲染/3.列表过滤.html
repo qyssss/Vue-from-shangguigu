@@ -1,0 +1,88 @@
+
+    <!DOCTYPE html>
+    <html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <script type="text/javascript" src="../js/vue.js"></script>
+    </head>
+    <style>
+        li {
+            list-style: none;
+        }
+    </style>
+
+    <body>
+        <div id="root">
+            <h2>人员列表</h2>
+            <input type="text" placeholder="请输出姓名" v-model="keyword">
+            <ul>
+                <li v-for="(p, index) in filPersons" ::key="index">
+                    {{ p.name }}-{{ p.age }}--{{ index }}
+                </li>
+            </ul>
+
+
+        </div>
+        <script type="text/javascript">
+            Vue.config.productionTip = false
+            // 用 watch 实现
+            /*  const vm = new Vue({
+                data(){
+                    return {
+                        keyword:'',
+                        persons:[
+                            {id:001,name:'马冬梅',age:23},
+                            {id:002,name:'周冬雨',age:12},
+                            {id:003,name:'周杰伦',age:21},
+                            {id:004,name:'温兆伦',age:21},
+                        ],
+                        filPersons:[],
+                       
+                    }
+                },
+                watch:{
+                    keyword:{
+                        immediate:true,
+                        handler(val){
+                        this.filPersons = this.persons.filter((p)=>{
+                        return p.name.indexOf(val) !== -1
+                        })   
+                        }
+                        
+                    }
+                }
+            })
+            vm.$mount('#root') */
+
+            // 用 computed 实现 优先去用计算属性
+             const vm = new Vue({
+                data(){
+                    return {
+                        keyword:'',
+                        persons:[
+                            {id:001,name:'马冬梅',age:23},
+                            {id:002,name:'周冬雨',age:12},
+                            {id:003,name:'周杰伦',age:21},
+                            {id:004,name:'温兆伦',age:21},
+                        ],
+                       
+                    }
+                },
+                computed:{
+                    filPersons(){
+                        return this.persons.filter((p)=>{
+                            return p.name.indexOf(this.keyword) !== -1
+                        })
+                    }
+                }
+            })
+            vm.$mount('#root')
+        </script>
+
+    </body>
+
+    </html>

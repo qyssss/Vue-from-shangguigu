@@ -1,0 +1,46 @@
+
+    <!DOCTYPE html>
+    <html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <script type="text/javascript" src="../js/vue.js"></script>
+    </head>
+
+    <body>
+        <div id="root">
+            <h2>hello {{ name }}</h2>
+            <!-- caps-lock enter tab delete space tab left up ..... -->
+            <!-- tab会把焦点移走,用keydown好一点 -->
+            <!-- 系统修饰键 ctrl alt shift meta 配合kewdown较简单,
+            用keyup需要再任意按其他键后松开 -->
+            <input type="text" placeholder="按回车提示输入" @keyup.enter="showInfo">
+
+            <!-- 只有按下 ctrl y 才能触发 -->
+            <input type="text" placeholder="按回车提示输入" @keyup.ctrl.y="showInfo">
+        </div>
+        <script type="text/javascript">
+            Vue.config.productionTip = false
+            const vm = new Vue({
+                data(){
+                    return {
+                        name:'sqy'
+                    }
+                },
+                methods:{
+                    showInfo(e){
+                        // if(e.key !== 'Enter') return
+                        console.log(e.key);
+                        console.log(e.target.value);
+                    },
+                }
+            })
+            vm.$mount('#root')
+        </script>
+
+    </body>
+
+    </html>

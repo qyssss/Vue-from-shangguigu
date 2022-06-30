@@ -1,0 +1,44 @@
+
+    <!DOCTYPE html>
+    <html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <script type="text/javascript" src="../js/vue.js"></script>
+
+    </head>
+
+    <body>
+        <div id="root">
+            <h2 v-if="a"></h2>
+            <h2 :style="{ opacity }">Hello</h2>
+        </div>
+
+        <script type="text/javascript">
+            Vue.config.productionTip = false
+            const vm = new Vue({
+                data(){
+                    return {
+                        opacity:1,
+                        a:false,
+                    }
+                },
+                // Vue完成模板解析并且把初始的真实dom放入页面后
+                // 别犯病写错名字
+                mounted(){
+                    setInterval(()=>{
+                    this.opacity -= 0.01
+                    if(this.opacity <= 0 ) this.opacity = 1 
+                    },30)   
+                },
+            })
+            
+            vm.$mount('#root')
+        </script>
+
+    </body>
+
+    </html>

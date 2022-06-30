@@ -1,0 +1,46 @@
+
+    <!DOCTYPE html>
+    <html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <script type="text/javascript" src="../js/vue.js"></script>
+    </head>
+
+    <body>
+        <div id="root">
+            <h2>天气怎么样? {{ info }}</h2>
+            <!-- 简单写法 可以少写 methods -->
+            <!-- 这里面的属性只能从 vm 里面找！ -->
+            <!-- <button @click="change">切换</button> -->
+            <button @click="isHot = !isHot">切换</button>
+        </div>
+        <script type="text/javascript">
+            const vm = new Vue({
+                data(){
+                    return {
+                      isHot:true, 
+                    }
+                },
+                computed:{
+                    info(){
+                        return this.isHot ? 'Hot' : 'Cool'
+                    }
+                },
+                methods: {
+                //    change(){
+                //     this.isHot = !this.isHot
+                //    }
+                },
+            
+                
+            })
+            vm.$mount('#root')
+        </script>
+
+    </body>
+
+    </html>

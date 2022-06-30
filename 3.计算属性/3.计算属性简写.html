@@ -1,0 +1,44 @@
+
+    <!DOCTYPE html>
+    <html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <script type="text/javascript" src="../js/vue.js"></script>
+    </head>
+
+    <body>
+        <div id="root">
+            firstname: <input type="text" v-model="firstname"> <br>
+            lastname: <input type="text" v-model="lastname"> <br>
+            fullname: <span>{{ fullName }}</span> <br>
+        </div>
+        <script type="text/javascript">
+            Vue.config.productionTip = false
+            const vm = new Vue({
+                data(){
+                    return {
+                        firstname:'s',
+                        lastname:'qy',
+                    }
+                },
+                // 计算属性有缓存效果 
+                computed: {
+                    // 只能是只有 get 的情况
+                    // 要记得这边 fullName 还是一个属性! 不能加 ()
+                    fullName(){
+                        return this.firstname + '-' + this.lastname
+                    }
+
+                }
+                
+            })
+            vm.$mount('#root')
+        </script>
+
+    </body>
+
+    </html>

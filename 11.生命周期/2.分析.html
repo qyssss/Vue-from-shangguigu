@@ -1,0 +1,72 @@
+
+    <!DOCTYPE html>
+    <html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <script type="text/javascript" src="../js/vue.js"></script>
+
+    </head>
+
+    <body>
+        <div id="root">
+            <h2>当前n:{{ n }}</h2>
+            <button @click="add">点我n++</button>
+            <button @click="destroy">销毁</button>
+        </div>
+
+        <script type="text/javascript">
+            Vue.config.productionTip = false
+            const vm = new Vue({
+                data(){
+                    return {
+                        n:1
+                    }
+                },
+                beforeCreate() {
+                    console.log('beforeCreate')
+                    // console.log(this)
+                },
+                created() {
+                    console.log('created');
+                },
+                beforeMount() {
+                    console.log('beforeMount')
+                },
+                mounted() {
+                    console.log('mounted')
+                },
+                beforeUpdate() {
+                    console.log('beforeUpdate')
+                },
+                updated() {
+                    console.log('updated')
+                },
+                beforeDestroy() {
+                    console.log('beforeDestroy');
+                    this.add()  // 这里不会触发页面更新,但是调用成功
+                },
+                // 销毁后自定义事件失效,原生dom没问题
+                destroyed() {
+                    console.log('destroyed');
+                },
+                methods: {
+                    add(){
+                        this.n++
+                    },
+                    destroy(){
+                        this.$destroy()
+                        console.log('destroy');
+                    }
+                },
+            })
+            
+            vm.$mount('#root')
+        </script>
+
+    </body>
+
+    </html>

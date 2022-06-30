@@ -1,0 +1,48 @@
+
+    <!DOCTYPE html>
+    <html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+    </head>
+    <style>
+        li {
+            list-style: none;
+        }
+    </style>
+
+    <body>
+        <script type="text/javascript">
+            let data = {
+            name:'sqy',
+            address:'beijing',
+          }
+        //   创建一个监视的实例对象
+        const obs = new Observer(data)
+        //   准备一个 vm 实例对象
+        let vm = {}
+        vm._data = data = obs
+        function Observer(obj){
+            // 汇总对象中所有属性形成数组
+            const keys = Object.keys(obj)
+            keys.forEach((k)=>{
+                // 这里 this 是 obs(实例对象),添加上 k属性和getter、setter
+                Object.defineProperty(this,k,{
+                    get(){
+                        return obj[k]
+                    },
+                    set(val){
+                        console.log(`${k}被改了,接下来解析模板,生成虚拟dom`);
+                        obj[k]=val
+                    }
+                })
+            })
+        }
+        </script>
+
+    </body>
+
+    </html>

@@ -1,0 +1,41 @@
+
+    <!DOCTYPE html>
+    <html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <script type="text/javascript" src="../js/vue.js"></script>
+    </head>
+
+    <body>
+        <div id="root">
+            firstname: <input type="text" v-model="firstname"> <br>
+            lastname: <input type="text" v-model="lastname"> <br>
+            <!-- 这边要用函数  和计算属性不同 -->
+            fullname: <span>{{ fullname() }}</span> <br>
+        </div>
+        <script type="text/javascript">
+            Vue.config.productionTip = false
+            const vm = new Vue({
+                data(){
+                    return {
+                        firstname:'s',
+                        lastname:'qy',
+                    }
+                },
+                // data中数据改变，Vue会重新解析模板,
+                methods:{
+                    fullname(){
+                        return this.firstname + '-' + this.lastname
+                    }
+                }
+            })
+            vm.$mount('#root')
+        </script>
+
+    </body>
+
+    </html>

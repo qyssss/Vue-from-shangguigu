@@ -1,0 +1,96 @@
+
+    <!DOCTYPE html>
+    <html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <script type="text/javascript" src="../js/vue.js"></script>
+    </head>
+    <style>
+        li {
+            list-style: none;
+        }
+    </style>
+
+    <body>
+        <div id="root">
+            <h1>学生信息</h1>
+            <button @click="student.age++">年龄+1</button> <br>
+            <button @click="addSex">加性别</button> <br>
+            <button @click="student.sex = '女'">改性别</button> <br>
+            <button @click="addFriend">列表首位加个朋友</button> <br>
+            <button @click="updateFirstFri">第一个朋友名字改为qys</button> <br>
+            <button @click="addHobby">添加一个爱好</button> <br>
+            <button @click="changeFirst">修改爱好为开车</button> <br>
+            <button @click="removeB">过滤爱好中的b</button>
+            <h2>学生姓名:{{ student.name }}</h2>
+            <h2>学生年龄:{{ student.age }}</h2>
+            <h2 v-if="student.sex">学生性别: {{ student.sex }}</h2>
+            <h2>hobby</h2>
+            <ul>
+                <li v-for="(h, index) in student.hobby" ::key="index">
+                    {{ h }}
+                </li>
+            </ul>
+            <h2>朋友</h2>
+            <ul>
+                <li v-for="(f, index) in student.friends" ::key="index">
+                    {{ f.name }} -- {{ f.age }}
+                </li>
+            </ul>
+
+        </div>
+        <script type="text/javascript">
+            Vue.config.productionTip = false
+             const vm = new Vue({
+                data(){
+                    return {
+                       student:{
+                        name:'sqy',
+                        age:12,
+                        hobby:['a','b','c'],
+                        friends:[
+                        {name:'tony',age:32},
+                        {name:'dsaa',age:52},
+                       ]
+                       },
+                       
+                    }
+                },
+                methods:{
+                   addSex(){
+                    // Vue.set(this.student,'sex','男')
+                    this.$set(this.student,'sex','男')
+                   },
+                   addFriend(){
+                    this.student.friends.unshift({name:'jack',age:50})
+                   },
+                   updateFirstFri(){
+                    this.student.friends[0].name = '张三'
+                    this.student.friends[0].age = 80
+                   },
+                   addHobby(){
+                    this.student.hobby.push('学习')
+                   },
+                   changeFirst(){
+                    // 不能通过数组索引值赋值 !!!!
+                    this.student.hobby.splice(0,1,'开车')
+                    // Vue.set(this.student.hobby,0,'开车') // 也可以
+                   },
+                   removeB(){
+                    this.student.hobby = this.student.hobby.filter((h)=>{
+                        return h !== 'b'
+                    })
+                   }
+
+                }
+            })
+            vm.$mount('#root')
+        </script>
+
+    </body>
+
+    </html>

@@ -14,7 +14,8 @@
     <body>
         <div id="root">
             <!-- 脚手架环境才这样用 -->
-            <my-school />
+            <my-school></my-school>
+            <hello></hello>
         </div>
 
         <script type="text/javascript">
@@ -31,15 +32,35 @@
                     <div>
                         <h2>学校名称:{{ schoolName }}</h2>
                         <h2>学校地址:{{ address }}</h2>
+                        <button @click="show">点我提示学校名</button>
                     </div>
                 `,
+                methods: {
+                    show(){
+                        // 组件这里的 this 是 VueComponent(vc) 实例对象(和vm类似)
+                        console.log(this,this.schoolName);
+                    }
+                },
             })
-            console.log(MySchool);
-
+            
+             const hello = Vue.extend({
+                data() {
+                    return {
+                        msg:'hello'
+                    }
+                },
+                template:`
+                <div>
+                    <h2>{{msg}}</h2>
+                </div>
+                `,
+            })
+            // console.log(MySchool);
+            // console.log(MySchool===hello);
             const vm = new Vue({
                 // 注册组件
                 components:{
-                    MySchool,
+                    MySchool,hello
                 },
                 data(){
                     return{

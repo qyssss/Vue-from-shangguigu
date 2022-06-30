@@ -1,0 +1,74 @@
+
+    <!DOCTYPE html>
+    <html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <script type="text/javascript" src="../js/vue.js"></script>
+
+    </head>
+
+    <body>
+        <div id="root">
+            <!-- 写这个 Vue 才会帮你 new 实例 -->
+            <school></school>
+        </div>
+
+        <script type="text/javascript">
+            Vue.config.productionTip = false
+            // 对原型的复习
+            /* function Demo(){
+                this.a=1
+                this.b=2
+            }
+            const d = new Demo()
+            console.log(Demo.prototype);
+            console.log(d.__proto__);
+            console.log(Demo.prototype===d.__proto__);
+            // 通过显示原型属性操作原型对象
+            Demo.prototype.x = 99
+            // 会自行通过隐式原型链查找 d.__proto__.x
+            console.log(d.x); */
+           
+            const school = Vue.extend({
+                data() {
+                    return {
+                        schoolName:'sgg',
+                        address:'beijing',
+                    }
+                },
+                template:`
+                    <div>
+                        <h2>学校名称:{{ schoolName }}</h2>
+                        <h2>学校地址:{{ address }}</h2>
+                        <button @click="showX">点我输出x</button>
+                    </div>
+                `,
+                methods: {
+                    showX(){
+                        // 说明可以访问 Vue 原型对象上的内容
+                        console.log(this.x)
+                    }
+                },
+            })
+
+            const vm = new Vue({
+                // 注册组件
+                components:{
+                    school
+                },
+            }).$mount('#root')
+            // 重要的内置关系: VueComponent.prototype.__proto__ === Vue.prototype
+            // 目的: 让组件实例对象(vc) 可以访问到 Vue 原型上的所有属性方法
+            // vc和vm区别,data必须写成函数,不可以挂载(写el配置)
+            console.log(school.prototype.__proto__ === Vue.prototype);
+            Vue.prototype.x = 99
+            console.log(school.prototype.x);
+        </script>
+
+    </body>
+
+    </html>

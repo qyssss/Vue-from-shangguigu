@@ -27,11 +27,16 @@
 
             // 全局指令
             /* Vue.directive('focus',{
-                 focus:{
-                        update(el,binding) {
-                            el.value=binding.value
-                        },
-                    }
+                bind(el,binding){
+                el.value=binding.value
+                },
+                // 指令所在元素被插入页面时
+                inserted(el,binding) {
+                el.focus()
+                },
+                update(el,binding) {
+                el.value=binding.value
+                },
             })
             Vue.directive('big',function(el,binding){
                         el.innerText=binding.value * 10

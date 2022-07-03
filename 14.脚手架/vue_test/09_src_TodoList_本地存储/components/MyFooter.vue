@@ -14,7 +14,7 @@
 <script>
 export default {
   name: "MyFooter",
-  props: ["todos"],
+  props: ["todos", "checkAllTodo", "clearAllTodo"],
   computed: {
     total() {
       return this.todos.length;
@@ -37,8 +37,7 @@ export default {
         return this.total === this.doneTotal && this.total > 0;
       },
       set(value) {
-        // this.checkAllTodo(value);
-        this.$emit("checkAllTodo", value);
+        this.checkAllTodo(value);
       },
     },
   },
@@ -48,7 +47,7 @@ export default {
     }, */
     clearAll() {
       if (confirm("确定删除已完成任务吗?")) {
-        this.$emit("clearAllTodo");
+        this.clearAllTodo();
       }
     },
   },

@@ -1,0 +1,45 @@
+
+    <!DOCTYPE html>
+    <html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>localStorage</title>
+    </head>
+
+    <body>
+        <!-- 本地存储,关闭浏览器后仍然存在 -->
+        <h2>localStorage</h2>
+        <button onclick="saveData()">点我保存</button>
+        <button onclick="readData()">点我读数据</button>
+        <button onclick="deleteData()">点我删除一个数据</button>
+        <button onclick="deleteAllData()">点我清空数据</button>
+
+        <script>
+            let p = {name:'sqy',age:18}
+            function saveData(){
+            localStorage.setItem('msg','hello!!!')
+            localStorage.setItem('msg2',6666)
+            // 要把对象转成字符串(否则自动给你调用toString会变成object)
+            localStorage.setItem('person',JSON.stringify(p))
+        }
+        // 读数据没读到 就是 null
+        function readData(){
+          console.log(localStorage.getItem('msg2')) 
+
+          const result = localStorage.getItem('person')
+            //  把字符串再转成对象 
+          console.log(JSON.parse(result));
+        }
+        function deleteData(){
+            localStorage.removeItem('msg2')
+        }   
+         function deleteAllData(){
+            localStorage.clear()
+        }   
+        </script>
+    </body>
+
+    </html>

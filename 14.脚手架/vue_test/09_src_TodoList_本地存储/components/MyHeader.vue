@@ -26,11 +26,12 @@ export default {
       // 将用户输入包装成 todo 对象
       const todoObj = { id: nanoid(), title: this.title, done: false };
       // 通知 App 组件去添加一个 todo 对象
-      this.$emit("addTodo", todoObj);
+      this.addTodo(todoObj);
       this.title = "";
       // e.target.value = "";
     },
   },
+  props: ["addTodo"],
 };
 </script>
 

@@ -15,8 +15,6 @@
 </template>
 
 <script>
-import pubsub from "pubsub-js";
-
 export default {
   name: "MyItem",
   // 声明接收 todo 对象
@@ -29,8 +27,7 @@ export default {
     },
     handleDelete(id) {
       if (confirm("确定删吗")) {
-        // this.$bus.$emit("deleteTodo", id);
-        pubsub.publish("deleteTodo", id);
+        this.$bus.$emit("deleteTodo", id);
       }
     },
   },

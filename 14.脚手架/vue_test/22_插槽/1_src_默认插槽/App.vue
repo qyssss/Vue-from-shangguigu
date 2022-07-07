@@ -1,0 +1,48 @@
+<template>
+  <div class="container">
+    <Category title="美食">
+      <img
+        src="https://lmg.jj20.com/up/allimg/tp03/1Z922164FBG0-0-lp.jpg"
+        alt="111"
+      />
+    </Category>
+    <Category title="游戏">
+      <ul>
+        <li v-for="(game, index) in games" :key="index">{{ game }}</li>
+      </ul>
+    </Category>
+    <Category title="电影">
+      <video
+        src="http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4"
+        controls
+      ></video>
+    </Category>
+  </div>
+</template>
+
+<script>
+import Category from "./components/Category.vue";
+
+export default {
+  name: "App",
+  components: { Category },
+  data() {
+    return {
+      foods: ["火锅", "烧烤", "小龙虾", "牛排"],
+      games: ["红色警戒", "穿越火线", "劲舞团", "超级玛丽"],
+      films: ["《教父》", "《拆弹专家》", "《你好，李焕英》", "《尚硅谷》"],
+    };
+  },
+};
+</script>
+<style>
+.container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+video {
+  width: 100%;
+}
+</style>
+

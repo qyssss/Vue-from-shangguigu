@@ -1,7 +1,7 @@
 <template>
   <div>
     <Count />
-    <hr />
+    <hr>
     <Person />
   </div>
 </template>

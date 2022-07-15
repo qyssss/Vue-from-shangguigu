@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let person={
+            name:'sqy',
+            age:15
+        }
+        // 模拟 Vue2响应式原理 不能捕获删除和添加 Vue2需要用 this.$set,this.$delete
+        /* let p = {}
+        Object.defineProperty(p, 'name',{
+            configurable:true,
+            // 读数据调用
+            get(){
+                return person.name
+            },
+            // 修改时调用
+            set(value){
+                console.log('数据被修改了')
+                person.name = value
+
+            }
+        }) */
+
+        // 模拟 Vue3 中的响应式原理 Proxy拦截对象中属性变化,再通过 Reflect 反射对象对被代理对象的属性进行操作
+        const p = new Proxy(person,{
+            // target 是元数据(person),propName是读(改)的数据
+            get(target,propName){
+                console.log(`被读取了${propName}属性`)
+                // 这里传入形参propName作为变量需要用[]
+                return Reflect.get(target,propName)
+            },
+            // 这个 set 在修改和更新时都调用了,所以不需要再加个update函数
+            set(target,propName,value){
+                console.log(`被修改了${propName}属性`)
+                return Reflect.set(target,propName,value)
+            },
+            // 比起 defineProperty 新增的删除
+            deleteProperty(target,propName){
+                console.log(`被删除了${propName}属性`)
+                return Reflect.deleteProperty(target,propName)
+            }
+        })
+    
+        let obj={a:1,b:2}
+        // 有重复直接报错 写 try catch 捕获麻烦
+        /* Object,defineProperty(obj,'c',{
+            get(){return 3}
+        })
+        Object,defineProperty(obj,'c',{
+            get(){return 3}
+        }) */
+        
+        // 新增方法 Reflect   通过返回值判断是否有问题
+        /* const x1 = Reflect.defineProperty(obj,'c',{
+            get(){return 3}
+        })
+        const x2 = Reflect.defineProperty(obj,'c',{
+            get(){return 3}
+        }) */
+    </script>
+</body>
+</html>

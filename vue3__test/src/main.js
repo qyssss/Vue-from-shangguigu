@@ -7,6 +7,7 @@ const app = createApp(App)
 
 app.mount('#app')
 
+// app.config.globalProperties === Vue.prototype vue3 没有了 Vue
 
 // Vue2写法 在3中不兼容
 /* import Vue from 'vue'

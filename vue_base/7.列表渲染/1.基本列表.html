@@ -14,14 +14,14 @@
         <div id="root">
             <ul>
                 <!-- 遍历数组 -->
-                <li v-for="(person, index) in persons" ::key="index">
+                <li v-for="(person, index) in persons" :key="index">
                     {{ person.name }}-{{ person.age }}--{{ index }}
                 </li>
             </ul>
             <ul>
                 <!-- 遍历对象 -->
                 <!-- 后面那个 k 是索引 (键) -->
-                <li v-for="(value, k) in car" ::key="k">
+                <li v-for="(value, k) in car" :key="k">
                     {{ k }}-{{ value }}
                 </li>
             </ul>
